@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css'
 import AppName from './components/AppName'
 import TodoInput from './components/TodoInput'
+import { itemcontext } from './Store/items-store';
 
 function App() {
 
@@ -39,20 +40,22 @@ function App() {
     setitem([...item,newi]);
   }
 
-  const deleteitem = (index) =>{
+  const delitem = (index) =>{
     
     const del = item.filter((_,i)=>i!==index);
     setitem(del);
   };
 
   return (
-    <>
+    <itemcontext.Provider value={{item,changeItem,delitem}}>
      <div>
       <AppName />
-      <TodoInput todoItem={item} changeItem={changeItem} deletenode={deleteitem}/>
+      <TodoInput/>
+      {/* <TodoInput changeItem={changeItem} deletenode={deleteitem}/> */}
+
       {/* <button onClick={increase}>count : {count}</button> */}
      </div>
-    </>
+    </itemcontext.Provider>
   )
 }
 

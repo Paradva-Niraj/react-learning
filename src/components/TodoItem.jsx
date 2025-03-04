@@ -1,11 +1,16 @@
-const TodoItem = ({todoItems,deletetodo}) => {
-    const deleteitem = (index) =>{
-      deletetodo(index);
-    }
+import { useContext } from "react";
+import { itemcontext } from "../Store/items-store";
 
+const TodoItem = () => {
+  const {delitem} = useContext(itemcontext);
+    const deleteitem = (index) =>{
+      delitem(index);
+    }
+    const item = useContext(itemcontext).item;
+    console.log(item);
     return (
         <>
-                {todoItems.map((value,index) => (
+                {item.map((value,index) => (
                     <div key={index} className="container">
                     <div className="row">
                       <div className="col-6">

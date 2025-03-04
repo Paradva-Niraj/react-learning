@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TodoItem from "./TodoItem";
+import { itemcontext } from "../Store/items-store";
 
-function TodoInput ({todoItem,changeItem,deletenode}){
 
-  let [item,setitem] = useState("");
+function TodoInput (){
+  const {item} = useContext(itemcontext);
+  const {changeItem} = useContext(itemcontext);
+  let [items,setitem] = useState("");
   let [date,setdate] = useState("");
   const additem = () =>{
-    if(item!="" && date!="")
+    if(items!="" && date!="")
     {
-      changeItem(item,date);
+      changeItem(items,date);
       setitem("");
       setdate("");
     }
@@ -27,7 +30,7 @@ function TodoInput ({todoItem,changeItem,deletenode}){
         <div className="container">
           <div className="row">
             <div className="col-6">
-              <input type="text" className="form-control form-control-lg mb-3" value={item} onChange={(e)=>setitem(e.target.value)} placeholder='Enter Todo'></input>
+              <input type="text" className="form-control form-control-lg mb-3" value={items} onChange={(e)=>setitem(e.target.value)} placeholder='Enter Todo'></input>
             </div>
             <div className="col-4">
               <input type="date" className="form-control form-control-lg md-3 alert-primary" value={date} onChange={(e)=>setdate(e.target.value)} ></input>
@@ -37,7 +40,7 @@ function TodoInput ({todoItem,changeItem,deletenode}){
             </div>
           </div>
         </div>
-        <TodoItem todoItems={todoItem} deletetodo={deleteitem} />
+        <TodoItem/>
       {/* </form> */}
     </>
 }
